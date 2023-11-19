@@ -6,3 +6,8 @@ Proyecto 3 Esquema de Secreto Compartido de Shamir
 * Morales Chaparro Gael Antonio - 320076972
 * Sosa Romo Juan Mario - 320051926
 * Pastor De La Cruz Miguel - 320125537
+
+## Propuestas Lenguajes de programacion
+* C++
+* Java
+* Python
