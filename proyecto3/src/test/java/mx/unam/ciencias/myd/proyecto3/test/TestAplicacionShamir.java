@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import mx.unam.ciencias.myd.proyecto3.AplicacionShamir;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

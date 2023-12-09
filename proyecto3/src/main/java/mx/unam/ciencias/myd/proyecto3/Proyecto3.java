@@ -1,5 +1,8 @@
 package mx.unam.ciencias.myd.proyecto3;
 
+import mx.unam.ciencias.myd.proyecto3.ParOrdenado;
+import mx.unam.ciencias.myd.proyecto3.Polinomio;
+
 /**
  * Proyecto 3: Secreto compartido Shamir.
  */
@@ -21,22 +24,12 @@ public class Proyecto3 {
 
     /* Instanciamos una AplicacionShamir y la ejecutamos.*/
     public static void main(String[] args) {
-        try{
-            //AplicacionShamir aplicacionShamir = new aplicacionShamir(args);
-            //aplicacionShamir.ejecuta();
-            System.exit(0);
-        } catch(ExcepcionFormatoInvalido efi){
-            System.err.println(efi.getMessage());
-            formato();
-            System.exit(ERROR_FORMATO);
-        }
-        catch(ExcepcionArchivoInvalido eai){
-            System.err.println(eai.getMessage());
-            System.exit(ERROR_ARCHIVO);
-        }
-        catch(IllegalArgumentException iae){
-            System.err.println(iae.getMessage());
-            System.exit(ERROR_USO);
-        }
+        ParOrdenado<Integer>[] puntos = new ParOrdenado[4];
+
+        puntos[0] = new ParOrdenado(-1,24);
+        puntos[1] = new ParOrdenado(1,-4);
+        puntos[2] = new ParOrdenado(2,-27);
+        puntos[3] = new ParOrdenado(3,-88);
+        System.out.println(Polinomio.interpolacion(puntos));
     }
 }
