@@ -1,4 +1,4 @@
-# MyP_proyecto2 Cobertura Nubosa
+# MyP_proyecto3 Secreto Compartido de Shamir
 
 ## Integrantes del Equipo
 * Barrientos Sánchez José Antonio 423019269
