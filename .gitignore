@@ -1,0 +1,7 @@
+*.class
+*.jar
+*~
+.DS*
+._*
+**/target/
+*.sh*
