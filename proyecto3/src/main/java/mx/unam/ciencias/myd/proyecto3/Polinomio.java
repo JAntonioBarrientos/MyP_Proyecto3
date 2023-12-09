@@ -12,26 +12,26 @@ import mx.unam.ciencias.myd.proyecto3.ParOrdenado;
 public class Polinomio{
 
     /** El grado del polinomio. */
-    long grado;
+    int grado;
     /** Los coeficientes del polinomio. El indice i se 
      * encuentra el coeficiente termino con grado i.
     */
-    long[] coeficientes;
+    int[] coeficientes;
 
     /** 
      * Constructor que recibe un arreglo de coeficientes.
      * @param coeficientes el arreglo de coeficientes.
      */
-    public Polinomio(long[] coeficientes){
-        // Codigo pendiente
+    public Polinomio(int[] coeficientes){
+        this.coeficientes = coeficientes;
     }
 
     /** 
      * Constructor que recibe el grado del polinomio.
      * @param grado el grado del polinomio.
      */
-    public Polinomio(long grado){
-        // Codigo pendiente
+    public Polinomio(int grado){
+        coeficientes = new int[grado +1];
     }
 
     /** 
@@ -40,8 +40,8 @@ public class Polinomio{
      * @param grado el grado del polinomio.
      * @throws IllegalArgumentException si el grado es mayor al grado del polinomio.
      */
-    public void setCoeficiente(long coeficiente, long grado){
-        // Codigo pendiente
+    public void setCoeficiente(int coeficiente, int grado){
+        coeficientes[grado] = coeficiente;
     }
 
     /** 
@@ -50,27 +50,15 @@ public class Polinomio{
      * @return el coeficiente del polinomio.
      */
     public long getCoeficiente(long grado){
-        // Codigo pendiente
-        return 0;
+        return coeficientes[grado];
     }
-
-    /** 
-     * Metodo que regresa los coeficientes del polinomio.
-     * @return los coeficientes del polinomio.
-     */
-    public long getCoeficientes(long[] grado){
-        // Codigo pendiente
-        return 0;
-    }
-
 
     /** 
      * Metodo que regresa el grado del polinomio.
      * @return el grado del polinomio.
      */
-    public long getGrado(){
-        // Codigo pendiente
-        return 0;
+    public int getGrado(){
+        return grado;
     }
 
 
@@ -80,7 +68,13 @@ public class Polinomio{
      * @return el valor del polinomio evaluado en x.
      */
     public long evalua(long x){
-        return x;
+        long factor = 1;
+        long resultado = 0;
+        for(int i =0 ; i < grado; i++){
+            resultado += coeficientes[i] * factor;
+            factor *= x; 
+        }
+        return resultado;
     }
 
     /**
