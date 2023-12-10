@@ -1,10 +1,12 @@
-package mx.unam.ciencias.myp.proyecto3;
+package mx.unam.ciencias.myp.proyecto3.test;
 
 import java.util.Arrays;
 import java.util.Random;
 
 import org.junit.Test;
 import org.junit.Assert;
+
+import mx.unam.ciencias.myp.proyecto3.*;
 
 public class TestDispersadorSHA256 {
 

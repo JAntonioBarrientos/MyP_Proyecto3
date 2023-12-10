@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myp.proyecto3;
+package mx.unam.ciencias.myp.proyecto3.test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,8 @@ import java.security.InvalidKeyException;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import mx.unam.ciencias.myp.proyecto3.*;
 
 /**
  * Clase para las pruebas unitarias de {@link DecifradorAES}
@@ -40,7 +42,7 @@ public class TestDecifradorAES {
      * @param contraDecifrado la contraseña para decifrar
      */
     private void auxTestDecifrar(String contraCifrado, String contraDecifrado, boolean mismaContra) {
-        
+
     }
 
 }

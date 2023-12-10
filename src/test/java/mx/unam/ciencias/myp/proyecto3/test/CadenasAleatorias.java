@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myp.proyecto3;
+package mx.unam.ciencias.myp.proyecto3.test;
 
 import java.util.Random;
 
