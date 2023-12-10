@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myp.proyecto3;
+package mx.unam.ciencias.myp.proyecto3.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,8 @@ import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import mx.unam.ciencias.myp.proyecto3.*;
 
 /**
  * Clase para pruebas unitarias de {@link Docuemnto}

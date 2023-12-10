@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myp.proyecto3;
+package mx.unam.ciencias.myp.proyecto3.test;
 
 import java.util.Arrays;
 import java.util.Base64;
@@ -10,6 +10,8 @@ import java.nio.file.Files;
 
 import org.junit.Test;
 import org.junit.Assert;
+
+import mx.unam.ciencias.myp.proyecto3.*;
 
 public class TestCifradorAES {
 
