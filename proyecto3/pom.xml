@@ -79,7 +79,7 @@
             <configuration>
                <archive>
                   <manifest>
-                      <mainClass>mx.unam.ciencias.myp.proyecto3.Cifrador</mainClass>
+                      <mainClass>mx.unam.ciencias.myp.proyecto3.Proyecto3</mainClass>
                   </manifest>
                 </archive>
             </configuration>
