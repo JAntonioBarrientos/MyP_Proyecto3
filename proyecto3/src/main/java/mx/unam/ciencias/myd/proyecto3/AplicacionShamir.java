@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigInteger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -41,7 +42,7 @@ public class AplicacionShamir {
     /** El número total de evaluaciones requeridas. */
 
     /** Lista de pares ordenados de evaluaciones */
-    private List<ParOrdenado<Double>> evaluaciones;
+    private List<ParOrdenado<BigInteger>> evaluaciones;
     /** Ruta del archivo util */
     public String rutaArchivo ;
 
@@ -135,11 +136,11 @@ public class AplicacionShamir {
                 String[] partes = linea.split(" ");
                 
                 // Convierte las partes a tipo numérico (puedes ajustar esto según tus necesidades)
-                double x = Double.parseDouble(partes[0]);  /////////// NOTAAAAAAA aqui hay que usar bigints
-                double y = Double.parseDouble(partes[1]);
+                BigInteger x =  new BigInteger (partes[0]);  
+                BigInteger y = new BigInteger (partes[1]);
                 
                 // Crea un nuevo ParOrdenado y agrégalo a la lista
-                ParOrdenado<Double> par = new ParOrdenado<>(x, y);
+                ParOrdenado<BigInteger> par = new ParOrdenado<>(x, y);
                 evaluaciones.add(par);
             }
         } catch (IOException e) {
@@ -228,9 +229,9 @@ public class AplicacionShamir {
      */
     public void escribirParesOrdenados(String rutaArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
-            for (ParOrdenado<Double> par : evaluaciones) {
+            for (ParOrdenado<BigInteger> par : evaluaciones) {
                 // Escribe cada par en una línea con el formato "x y"
-                writer.write(par.getX() + " " + par.getY());
+                writer.write(par.getX().toString() + " " + par.getY().toString());
                 writer.newLine(); // Agrega un salto de línea después de cada par
             }
         } catch (IOException e) {
