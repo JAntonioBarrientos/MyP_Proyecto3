@@ -102,7 +102,12 @@ public class Polinomio{
         return grado;
     }
 
-
+    /**
+     * Devuelve una representación en formato de cadena de este objeto polinomio.
+     * La cadena resultante muestra los coeficientes del polinomio con sus respectivos grados.
+     *
+     * @return Una cadena que representa el polinomio en formato legible.
+    */
     public String toString(){
         String s = "";
         for(int i = 0; i < grado + 1; i++){
@@ -128,10 +133,12 @@ public class Polinomio{
     }
 
     /**
-     * 
-     * Realiza una version simplificada de la interpolacion
-     * de polinomios de lagrange para obtener el termino 
-     * independiente de un polinomio dado n puntos.
+     * Realiza la interpolación polinómica de Lagrange modificada para solo obtener 
+     * el término independiente del polinomio, todo sobre un campo finito MODP, el cual
+     * es un primo que hace que cada numero tenga inverso multiplicativo para poder dividir.
+     * @param puntos Un arreglo de pares ordenados, donde cada par contiene un valor x e y.
+     * @return El resultado de la interpolación polinómica en aritmética modular con respecto a MODP.
+     * @throws ArithmeticException Si ocurre un error durante la inversión modular o si MODP no es un primo.
      */
     public static BigInteger interpolacion(ParOrdenado<BigInteger>[] puntos){
         int n = puntos.length;
@@ -157,8 +164,8 @@ public class Polinomio{
     }
 
     /**
-     * Realiza una evaluacion de un polinomio en n puntos aleatorios. Pero 
-     * distintos de cero y distintos entre si.
+     * Realiza una evaluacion de un polinomio en n puntos aleatorios. Los cuales
+     * son distintos entre si, y ninguno igual a cero.
      * @param n el numero de puntos a evaluar.
      * @return un arreglo de n puntos aleatorios.
      */
