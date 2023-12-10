@@ -20,15 +20,34 @@ contiene información confidencial. EL cifrado del documento claro se hará con 
    $ git clone https://github.com/JAntonioBarrientos/MyP_Proyecto3.git
 ```
 
+2. Cambiate al directorio con el proyecto:
+
+```bash
+   $ cd MyP_Proyecto3
+```
+
+3. Compila el codigo 
+
+```bash
+   $ mvn compile
+```
+
+4. Crea el .jar para correr el programa 
+```bash
+   $ mvn install
+```
+
+Corre el programa en modo encriptar
+```bash
+   $ java -jar target/proyecto3 -c <archivo_para_evaluaciones> <numero_de_evaluaciones> <numero_minimo_de_evaluaciones> <archivo_a_encriptar> 
+```
+
+Corre el programa en modo desencriptar 
+```bash
+   $ java -jar target/proyecto3 -d <ruta_archivo_con_evaluaciones> <ruta_archivo_encriptado>
+```
 
 ## Clases auxiliares:
 
 - Cipher https://docs.oracle.com/javase/8/docs/api/javax/crypto/Cipher.html
 - MessageDigest https://docs.oracle.com/javase/8/docs/api/java/security/MessageDigest.html
-
-
-
-
-
-
-
