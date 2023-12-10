@@ -21,20 +21,26 @@ import java.security.InvalidKeyException;
 import java.util.Scanner;
 
 /**
- * <p>Clase para aplicaciones de archivos mze.</p>
+ * <p>
+ * Clase para aplicaciones de archivos mze.
+ * </p>
  *
- * <p>La clase cuenta con dos modos, dependiendo de los argumentos
- * ejecuta el modo para resolver laberintos leidos de la entrada 
+ * <p>
+ * La clase cuenta con dos modos, dependiendo de los argumentos
+ * ejecuta el modo para resolver laberintos leidos de la entrada
  * estandar o el modo para generar laberintos dados los parametros
- * escritos como argumentos de la aplicación.</p>
- */     
+ * escritos como argumentos de la aplicación.
+ * </p>
+ */
 
 public class AplicacionShamir {
 
     /** El modo de la aplicación, falso es que cifra y verdadero es que descifra. */
     private boolean descifra;
-    /** Llave de cifrado de AES obtenida del hash 
-     * de la contraseña con SHA-256.*/  
+    /**
+     * Llave de cifrado de AES obtenida del hash
+     * de la contraseña con SHA-256.
+     */
     private BigInteger key;
     /** El cifrador de AES. */
     private CifradorAES cifrador;
@@ -57,41 +63,43 @@ public class AplicacionShamir {
 
     /**
      * Construye una aplicacionShamir con base en los argumentos recibidos.
-     * Si se recibe la opción c, se configura al modo cifra, si se recibe la opción d, se configura al modo descifra.
+     * Si se recibe la opción c, se configura al modo cifra, si se recibe la opción
+     * d, se configura al modo descifra.
+     * 
      * @param args arreglo de dimensiones variables recibido del metodo main.
      * @throws IllegalArgumentException si no se especifica un modo de ejecución
-    */
-    public AplicacionShamir(String[] args){
+     */
+    public AplicacionShamir(String[] args) {
         this.evaluaciones = new ArrayList<>();
-        if(!args[0].toLowerCase().equals("-c") && !args[0].toLowerCase().equals("-d"))
+        if (!args[0].toLowerCase().equals("-c") && !args[0].toLowerCase().equals("-d"))
             throw new IllegalArgumentException("Modo de ejecución no válido.\n");
-        if(args[0].toLowerCase().equals("-c") && args.length == 5){
+        if (args[0].toLowerCase().equals("-c") && args.length == 5) {
             rutaArchivoEvaluaciones = args[1];
             int n = Integer.parseInt(args[2]);
-            if(n <= 2)
+            if (n <= 2)
                 throw new IllegalArgumentException("El número de evaluaciones debe ser mayor a 2.\n");
             this.n = n;
             int t = Integer.parseInt(args[3]);
-            if(t <= 1 || t > n)
-                throw new IllegalArgumentException("El número minimo de puntos debe ser mayor a 1 y menor o igual al número de evaluaciones.\n");
+            if (t <= 1 || t > n)
+                throw new IllegalArgumentException(
+                        "El número minimo de puntos debe ser mayor a 1 y menor o igual al número de evaluaciones.\n");
             this.t = t;
             rutaArchivoClaro = args[4];
             descifra = false;
-        }else if(args.length == 3){
+        } else if (args.length == 3) {
             rutaArchivoEvaluaciones = args[1];
             rutaArchivoCifrado = args[2];
             descifra = true;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Numero de argumentos invalido.\n");
         }
     }
 
     /**
-    * Ejecuta el modo de la aplicación.
-    */
-    public void ejecuta(){
-        if(descifra) 
+     * Ejecuta el modo de la aplicación.
+     */
+    public void ejecuta() {
+        if (descifra)
             descifra();
         else
             cifra();
@@ -103,7 +111,7 @@ public class AplicacionShamir {
             setPassword();
             cifrador = new CifradorAES(rutaArchivoClaro, contra, rutaArchivoClaro);
             cifrador.cifra();
-            Polinomio p = new Polinomio(cifrador.obtenSecreto(), t-1);
+            Polinomio p = new Polinomio(cifrador.obtenSecreto(), t - 1);
             evaluaciones = p.generaPuntos(n);
             escribirParesOrdenados(rutaArchivoEvaluaciones);
         } catch (IOException e) {
@@ -111,13 +119,13 @@ public class AplicacionShamir {
         }
     }
 
-    /**  Modo descifra de la aplicación. */
+    /** Modo descifra de la aplicación. */
     private void descifra() {
         try {
             consigueEvaluaciones(rutaArchivoEvaluaciones);
             ParOrdenado<BigInteger>[] puntos = new ParOrdenado[evaluaciones.size()];
             int i = 0;
-            for(ParOrdenado<BigInteger> par : evaluaciones){
+            for (ParOrdenado<BigInteger> par : evaluaciones) {
                 puntos[i] = par;
                 i++;
             }
@@ -130,40 +138,42 @@ public class AplicacionShamir {
     }
 
     /**
-        Metodo que solicita y lee la contraseña de la entrada estandar.
-    */
+     * Metodo que solicita y lee la contraseña de la entrada estandar.
+     */
     private void setPassword() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Introduce la contraseña para cifar el documento: ");
         contra = sc.nextLine();
         sc.close();
-      }
+    }
 
-    
     /**
-     * Metodo auxiliar que lee un archivo y lo convierte en una arreglo de pares ordenados.
+     * Metodo auxiliar que lee un archivo y lo convierte en una arreglo de pares
+     * ordenados.
+     * 
      * @param archivo el nombre del archivo a leer.
      * @return una lista de pares ordenados con el contenido del archivo.
      * @throws IOException si ocurre un error de entrada o salida.
      */
-    private void consigueEvaluaciones(String rutaArchivo){
+    private void consigueEvaluaciones(String rutaArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(" ");
-                BigInteger x =  new BigInteger (partes[0]);  
-                BigInteger y = new BigInteger (partes[1]);
+                BigInteger x = new BigInteger(partes[0]);
+                BigInteger y = new BigInteger(partes[1]);
                 ParOrdenado<BigInteger> par = new ParOrdenado<>(x, y);
                 evaluaciones.add(par);
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
     /**
-     * Metodo auxiliar que lee un archivo y regresa su contenido como una cadena.
-     * @param archivo el nombre del archivo a leer.
-     * @return el contenido del archivo como una cadena.
-     * @throws IOException si ocurre un error de entrada o salida.
+     * Lee del archivo recibido y regresa una cadena con el contendio
+     * 
+     * @param rutaArchivo el archivo del cual leer
+     * @return la cadena con la información del archivo
      */
     public static String leerArchivo(String rutaArchivo) {
         StringBuilder contenido = new StringBuilder();
@@ -177,24 +187,25 @@ public class AplicacionShamir {
         }
         return contenido.toString();
     }
-    
+
     /**
-     * Metodo auxiliar que escribe una cadena en un archivo.
-     * @param rutaArchivo el nombre del archivo a escribir.
-     * @param contenido la cadena a escribir en el archivo.
-     * @throws IOException si ocurre un error de entrada o salida.
+     * Escribe el contenidio recibido en la ruta dada, pero sin la extension
+     * 
+     * @param rutaArchivo el archivo en el que escribir
+     * @param contenido   el contenido a escribir
      */
     public void escribirArchivoSinExtension(String rutaArchivo, String contenido) {
         try {
             Path rutaSinExtension = obtenerRutaSinExtension(rutaArchivo);
             Files.write(rutaSinExtension, contenido.getBytes());
         } catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 
     /**
      * Metodo auxiliar que obtiene la ruta de un archivo sin su extensión.
+     * 
      * @param rutaArchivo el nombre del archivo.
      * @return la ruta del archivo sin extensión.
      */
@@ -206,6 +217,7 @@ public class AplicacionShamir {
 
     /**
      * Metodo auxiliar que quita la extensión de un nombre de archivo.
+     * 
      * @param nombreArchivo el nombre del archivo.
      * @return el nombre del archivo sin extensión.
      */
@@ -214,20 +226,20 @@ public class AplicacionShamir {
         if (index > 0) {
             return nombreArchivo.substring(0, index);
         }
-        return nombreArchivo; 
+        return nombreArchivo;
     }
 
-
     /**
-     * Metodo auxiliar que escribe el arreglo de pares ordenados en un archivo.
-     * @param rutaArchivo el nombre del archivo a escribir.
-     * @throws IOException si ocurre un error de entrada o salida.
+     * Escribe los pares ordenados (evaluaciones del polinomio) en el archivo de la
+     * ruta
+     * 
+     * @param rutaArchivo la ruta del archivo donde escribir
      */
     public void escribirParesOrdenados(String rutaArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             for (ParOrdenado<BigInteger> par : evaluaciones) {
                 writer.write(par.getX().toString() + " " + par.getY().toString());
-                writer.newLine(); 
+                writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();

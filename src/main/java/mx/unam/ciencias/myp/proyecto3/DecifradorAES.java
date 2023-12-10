@@ -52,9 +52,8 @@ public class DecifradorAES {
     /**
      * Constructor
      * 
-     * @param rutaDocumentoCifrado la dirección en la que está el documento cifrado
-     * @param contraUsuario        la contraseña con la que se decifrará el
-     *                             documento
+     * @param rutaDocumentoCifrado la ruta donde poner los bytes decifrados
+     * @param K                    la contraseña vista como un entero
      */
     public DecifradorAES(String rutaDocumentoCifrado, BigInteger K) {
 
