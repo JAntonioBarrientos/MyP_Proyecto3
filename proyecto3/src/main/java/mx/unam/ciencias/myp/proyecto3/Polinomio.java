@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myd.proyecto3;
+package mx.unam.ciencias.myp.proyecto3;
 
 import mx.unam.ciencias.myd.proyecto3.ParOrdenado;
 
@@ -162,21 +162,17 @@ public class Polinomio{
      * @param n el numero de puntos a evaluar.
      * @return un arreglo de n puntos aleatorios.
      */
-    public ParOrdenado<BigInteger>[] generaPuntos(int n){
-        ParOrdenado<BigInteger>[] puntos = new ParOrdenado[n];
+    public List<ParOrdenado<BigInteger>> generaPuntos(int n){
+        List<ParOrdenado<BigInteger>> puntos = new List<ParOrdenado<BigInteger>>();
         Set<BigInteger> set = new HashSet<BigInteger>();
         BigInteger x = new BigInteger(78, new Random());
         while(set.size() < n){
-            while(x.equals(new BigInteger("0"))){
+            while(x.equals(new BigInteger("0")))
                 x = new BigInteger(78, new Random());
-            }
             set.add(x);
         }
-        int i = 0;
-        for(BigInteger xi: set){
-            puntos[i] = new ParOrdenado<BigInteger>(xi, evalua(xi));
-            i++;
-        }
+        for(BigInteger xi: set)
+            puntos.add(new ParOrdenado<BigInteger>(xi, evalua(xi)));
         return puntos;
     }
 }

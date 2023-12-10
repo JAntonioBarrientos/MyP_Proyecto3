@@ -1,12 +1,12 @@
-package mx.unam.ciencias.myd.proyecto3.test;
+package mx.unam.ciencias.myp.proyecto3.test;
 
 import static org.junit.Assert.assertTrue;
 
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import mx.unam.ciencias.myd.proyecto3.ParOrdenado;
-import mx.unam.ciencias.myd.proyecto3.Polinomio;
+import mx.unam.ciencias.myp.proyecto3.ParOrdenado;
+import mx.unam.ciencias.myp.proyecto3.Polinomio;
 import java.math.BigInteger;
 
 import org.junit.Assert;
