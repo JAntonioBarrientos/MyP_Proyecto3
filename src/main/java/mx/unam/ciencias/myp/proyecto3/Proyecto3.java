@@ -49,5 +49,8 @@ public class Proyecto3 {
             System.err.printf("Error: %s\n",eai.getMessage());
             System.exit(ERROR_ARCHIVO);
         }
+        catch(IllegalArgumentException i){
+            System.err.printf("Error: %s\n",i.getMessage());
+        }
     }
 }

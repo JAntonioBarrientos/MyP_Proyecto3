@@ -103,23 +103,9 @@ public class AplicacionShamir {
             setPassword();
             cifrador = new CifradorAES(rutaArchivoClaro, contra, rutaArchivoClaro);
             cifrador.cifra();
-
-            BigInteger K = new BigInteger("1234567890");
-            //Polinomio p = new Polinomio(cifrador.obtenSecreto(), t-1);
-            Polinomio p = new Polinomio(t-1);
-            p.setCoeficiente(K, 0);
-            BigInteger password = cifrador.obtenSecreto();
-            
-
-            System.out.println(password.toString());
-            System.out.println("Generando evaluaciones...");
+            Polinomio p = new Polinomio(cifrador.obtenSecreto(), t-1);
             evaluaciones = p.generaPuntos(n);
-            for(ParOrdenado<BigInteger> par : evaluaciones){
-                System.out.println(par.toString());
-            }
-            System.out.println("Evaluaciones generadas.");
             escribirParesOrdenados(rutaArchivoEvaluaciones);
-            System.out.println("Escribir pares");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -135,11 +121,8 @@ public class AplicacionShamir {
                 puntos[i] = par;
                 i++;
             }
-            for(int j = 0; j < puntos.length; j++){
-                System.out.println(puntos[j].toString());
-            }
             key = Polinomio.interpolacion(puntos);
-            descifrador = new DecifradorAES(rutaArchivoCifrado, key);
+            descifrador = new DecifradorAES(rutaArchivoCifrado, Polinomio.MOD);
             descifrador.decifrar();
         } catch (InvalidKeyException e) {
             System.out.println("Ocurrió un error decifrando");

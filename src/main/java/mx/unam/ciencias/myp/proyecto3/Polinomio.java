@@ -19,9 +19,11 @@ import java.util.*;
 public class Polinomio{
 
     /** El modulo con el que se trabajara. Se trata de un numero primo
-     * de 78 digitos.
-     */
+     * de 78 digitos. */
     public static final BigInteger MODP = new BigInteger("208351617316091241234326746312124448251235562226470491514186331217050270460481");
+
+    /** El modulo primo para las operaciones.*/
+    public static final BigInteger MOD = new BigInteger    ("38746880011844258737140736756490342540702820773674455378373968896489989481230");
 
     /** El grado del polinomio. */
     private int grado;
@@ -121,13 +123,10 @@ public class Polinomio{
      * @return el valor del polinomio evaluado en x.
      */
     public BigInteger evalua(BigInteger x){
-        BigInteger factor = new BigInteger("1");
-        BigInteger resultado = new BigInteger("0");
-        for(int i = 0 ; i < grado; i++){
-            resultado = resultado.add(coeficientes[i].multiply(factor));
-            factor = factor.multiply(x);
-        }
-        return resultado;
+        BigInteger z = new BigInteger("0");
+        for(int i = 0; i <= this.grado ; i++)
+            z = z.add(this.getCoeficiente(i).multiply(x.pow(i)));
+        return z;
     }
 
     /**
@@ -172,9 +171,6 @@ public class Polinomio{
         Random r = new Random();
         for(int i = 0; i < n; i++){
             BigInteger x = new BigInteger(78, r);
-            while(x.equals(new BigInteger("0"))){
-                x = new BigInteger(78, r);
-            }
             puntos[i] = new ParOrdenado<>(x, evalua(x));
         }  
         ArrayList<ParOrdenado<BigInteger>> puntos2 = new ArrayList<>();
