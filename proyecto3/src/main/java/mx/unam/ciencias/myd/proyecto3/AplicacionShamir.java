@@ -12,6 +12,10 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * <p>Clase para aplicaciones de archivos mze.</p>
  *
@@ -148,7 +152,7 @@ public class AplicacionShamir {
     }
 
     /**
-     * Metodo auxiliar que lee un archivo cifrado y regresa su contenido como una cadena.
+     * Metodo auxiliar que lee un archivo y regresa su contenido como una cadena.
      * @param archivo el nombre del archivo a leer.
      * @return el contenido del archivo como una cadena.
      * @throws IOException si ocurre un error de entrada o salida.
@@ -167,6 +171,55 @@ public class AplicacionShamir {
 
         return contenido.toString();
     }
+    
+    /**
+     * Metodo auxiliar que escribe una cadena en un archivo.
+     * @param rutaArchivo el nombre del archivo a escribir.
+     * @param contenido la cadena a escribir en el archivo.
+     * @throws IOException si ocurre un error de entrada o salida.
+     */
+    public void escribirArchivoSinExtension(String rutaArchivo, String contenido) {
+        try {
+            // Obtener la ruta del archivo sin extensión
+            Path rutaSinExtension = obtenerRutaSinExtension(rutaArchivo);
+
+            // Escribir el contenido en el nuevo archivo
+            Files.write(rutaSinExtension, contenido.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo básico de errores de entrada o salida
+        }
+    }
+
+    /**
+     * Metodo auxiliar que obtiene la ruta de un archivo sin su extensión.
+     * @param rutaArchivo el nombre del archivo.
+     * @return la ruta del archivo sin extensión.
+     */
+    private Path obtenerRutaSinExtension(String rutaArchivo) {
+        // Obtener la ruta del archivo como objeto Path
+        Path rutaOriginal = Paths.get(rutaArchivo);
+
+        // Obtener el nombre del archivo sin extensión
+        String nombreSinExtension = quitarExtension(rutaOriginal.getFileName().toString());
+
+        // Construir la ruta del archivo sin extensión
+        return rutaOriginal.resolveSibling(nombreSinExtension);
+    }
+
+    /**
+     * Metodo auxiliar que quita la extensión de un nombre de archivo.
+     * @param nombreArchivo el nombre del archivo.
+     * @return el nombre del archivo sin extensión.
+     */
+    private String quitarExtension(String nombreArchivo) {
+        // Encontrar la última aparición del punto (.) para obtener la extensión
+        int index = nombreArchivo.lastIndexOf('.');
+        if (index > 0) {
+            return nombreArchivo.substring(0, index);
+        }
+        return nombreArchivo; // Si no hay punto, devolver el nombre original
+    }
+
 
     /**
      * Metodo auxiliar que escribe el arreglo de pares ordenados en un archivo.
