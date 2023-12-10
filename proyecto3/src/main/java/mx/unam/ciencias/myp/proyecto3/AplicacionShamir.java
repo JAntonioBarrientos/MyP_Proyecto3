@@ -47,6 +47,8 @@ public class AplicacionShamir {
     public String rutaArchivoClaro;
     /** Ruta del archivo de evaluaciones. */
     public String rutaArchivoEvaluaciones;
+    /** Ruta del archivo cifrado. */
+    public String rutaArchivoCifrado;
 
     /**
      * Construye una aplicacionShamir con base en los argumentos recibidos.
@@ -58,11 +60,25 @@ public class AplicacionShamir {
         this.evaluaciones = new ArrayList<>();
         if(!args[0].toLowerCase().equals("-c") && !args[0].toLowerCase().equals("-d"))
             throw new IllegalArgumentException("Modo de ejecución no válido.\n");
-        if(args[0].toLowerCase().equals("-c")){
-            //Contruir CifradorAES
+        if(args[0].toLowerCase().equals("-c") && args.length == 5){
+            rutaArchivoEvaluaciones = args[1];
+            int n = Integer.parseInt(args[2]);
+            if(n <= 2)
+                throw new IllegalArgumentException("El número de evaluaciones debe ser mayor a 2.\n");
+            this.n = n;
+            int t = Integer.parseInt(args[3]);
+            if(t <= 1 || t > n)
+                throw new IllegalArgumentException("El número minimo de puntos debe ser mayor a 1 y menor o igual al número de evaluaciones.\n");
+            this.t = t;
+            rutaArchivoClaro = args[4];
             descifra = false;
-        }else{
+        }else if(args.length == 3){
+            rutaArchivoEvaluaciones = args[1];
+            rutaArchivoCifrado = args[2];
             descifra = true;
+        }
+        else{
+            throw new IllegalArgumentException("Numero de argumentos invalido.\n");
         }
     }
 
