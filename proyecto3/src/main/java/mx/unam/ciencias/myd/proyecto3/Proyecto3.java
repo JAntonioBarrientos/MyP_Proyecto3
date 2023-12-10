@@ -1,5 +1,8 @@
 package mx.unam.ciencias.myd.proyecto3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mx.unam.ciencias.myd.proyecto3.AplicacionShamir;
 
 /**
@@ -21,9 +24,14 @@ public class Proyecto3 {
         System.err.printf("La forma de ejecucion es: <OPCION> <ARCHIVO> <ARCHIVO / INT>\n");
     }
 
-    /* Instanciamos una AplicacionShamir y la ejecutamos.*/
+    /**
+     * Método principal.
+     * Hacemos un chequeo rapido de la cantidad minima de argumentos.
+     * Checamos tambien algunos errores comunes y ejecutamos la aplicación.
+     * @param args argumentos de la línea de comandos.
+     */
     public static void main(String[] args) {
-        if (args.length != 3) {
+        if (args.length > 3) {
             System.err.printf("Error: uso incorrecto de programa.\n");
             formato();
             System.exit(ERROR_USO);
@@ -40,10 +48,6 @@ public class Proyecto3 {
         catch(ExcepcionArchivoInvalido eai){
             System.err.printf("Error: %s\n",eai.getMessage());
             System.exit(ERROR_ARCHIVO);
-        }
-        catch(IllegalArgumentException iae){
-            System.err.printf("Error: %s\n",iae.getMessage());
-            System.exit(ERROR_USO);
         }
     }
 }
