@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myd.proyecto3;
+package mx.unam.ciencias.myp.proyecto3;
 
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
@@ -30,10 +30,6 @@ public class AplicacionShamir {
 
     /** El modo de la aplicación, verdadero es que cifra (1) y falso es que descifra (2). */
     private boolean descifra;
-    /** El cifrador. */
-    private CifradorShamir cifrador;
-    /** El descifrador. */
-    private DescifradorShamir descifrador;
     /** Llave de cifrado de AES obtenida del hash 
      * de la contraseña con SHA-256.*/  
     private long key;
@@ -57,9 +53,9 @@ public class AplicacionShamir {
         if(!args[0].toLowerCase().equals("-c") && !args[0].toLowerCase().equals("-d"))
             throw new IllegalArgumentException("Modo de ejecución no válido.\n");
         if(args[0].toLowerCase().equals("-c")){
-            this.cifrador = construyeCifrador(args);
+            //this.cifrador = construyeCifrador(args);
         }else{
-            this.descifrador = construyeDescifrador(args);
+            //this.descifrador = construyeDescifrador(args);
         }
     }
 
@@ -77,7 +73,7 @@ public class AplicacionShamir {
      * @throws ExcepcionOpcionInvalida si los argumentos estan en un formato incorrecto.
      * @return el cifrador construido.
      */
-    private CifradorShamir construyeCifrador(String[] args){
+    /*private CifradorShamir construyeCifrador(String[] args){
         // Codigo pendiente
         this.descifra = false;
         return null;
@@ -94,33 +90,33 @@ public class AplicacionShamir {
      * @throws ExcepcionOpcionInvalida si los argumentos estan en un formato incorrecto.
      * @return el descifrador construido.
      */
-    private DescifradorShamir construyeDescifrador(String[] args){
+    /*private DescifradorShamir construyeDescifrador(String[] args){
         // Codigo pendiente
         this.descifra = true;
         consigueEvaluaciones(args[1]);
         return null;
-    }
+    }*/
 
     /**
     * Ejecuta el modo de la aplicación.
     */
-    public void ejecuta(){
+    /*public void ejecuta(){
         if(descifra) 
             descifra();
         else
             cifra();
-    }
+    }*/
 
     /** Modo cifra de la aplicación. .*/
-    private void cifra() {
+    /*private void cifra() {
         cifrador.setPassword();
         cifrador.cifra();
-    }
+    }*/
 
     /** Modo descifra de la aplicación. */
-    private void descifra() {
+    /*private void descifra() {
         descifrador.descifra();
-    }
+    }*/
 
     /**
      * Metodo auxiliar que lee un archivo y lo convierte en una arreglo de pares ordenados.

@@ -1,4 +1,4 @@
-package mx.unam.ciencias.myd.proyecto3;
+package mx.unam.ciencias.myp.proyecto3;
 
 /**
  * Clase para representar un par ordenado.

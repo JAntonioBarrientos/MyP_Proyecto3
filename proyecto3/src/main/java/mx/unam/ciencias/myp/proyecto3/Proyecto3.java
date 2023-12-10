@@ -1,9 +1,9 @@
-package mx.unam.ciencias.myd.proyecto3;
+package mx.unam.ciencias.myp.proyecto3;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.unam.ciencias.myd.proyecto3.AplicacionShamir;
+import mx.unam.ciencias.myp.proyecto3.AplicacionShamir;
 
 /**
  * Proyecto 3: Secreto compartido Shamir.
@@ -38,7 +38,7 @@ public class Proyecto3 {
         }
         try{
             AplicacionShamir aplicacionShamir = new AplicacionShamir(args);
-            aplicacionShamir.ejecuta();
+            //aplicacionShamir.ejecuta();
             System.exit(0);
         }catch(ExcepcionFormatoInvalido efi){
             System.err.printf("Error: %s\n",efi.getMessage());

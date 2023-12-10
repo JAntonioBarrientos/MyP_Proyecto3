@@ -1,9 +1,9 @@
-package mx.unam.ciencias.myd.proyecto3;
+package mx.unam.ciencias.myp.proyecto3;
 
 /**
- * Clase para excepciones por opciones invalidas.
+ * Clase para excepciones por formato invalido
  */
-public class ExcepcionOpcionInvalida extends IllegalArgumentException {
+public class ExcepcionFormatoInvalido extends IllegalArgumentException {
 
     /**
      * Constructor vacío.
@@ -14,7 +14,7 @@ public class ExcepcionOpcionInvalida extends IllegalArgumentException {
      * Constructor que recibe un mensaje para el usuario.
      * @param mensaje un mensaje que verá el usuario cuando ocurra la excepción.
      */
-    public ExcepcionOpcionInvalida(String mensaje) {
+    public ExcepcionFormatoInvalido(String mensaje) {
         super(mensaje);
     }
 }
