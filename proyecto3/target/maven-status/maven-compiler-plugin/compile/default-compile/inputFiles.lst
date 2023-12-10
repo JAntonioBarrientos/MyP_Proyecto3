@@ -1,6 +1,6 @@
-/home/gaelchaparro06/CifradorEjemplo/cifrador/src/main/java/mx/unam/ciencias/myp/proyecto3/Documento.java
-/home/gaelchaparro06/CifradorEjemplo/cifrador/src/main/java/mx/unam/ciencias/myp/proyecto3/Cifrador.java
-/home/gaelchaparro06/CifradorEjemplo/cifrador/src/main/java/mx/unam/ciencias/myp/proyecto3/DecifradorAES.java
-/home/gaelchaparro06/CifradorEjemplo/cifrador/src/main/java/mx/unam/ciencias/myp/proyecto3/CifradorAES.java
-/home/gaelchaparro06/CifradorEjemplo/cifrador/src/main/java/mx/unam/ciencias/myp/proyecto3/DispersadorSHA256.java
-/home/gaelchaparro06/CifradorEjemplo/cifrador/src/main/java/mx/unam/ciencias/myp/proyecto3/ExcepcionArchivoInvalido.java
+/home/gaelchaparro06/CC/TercerSemestre/ModeladoProgramacion/MyP_Proyecto3/proyecto3/src/main/java/mx/unam/ciencias/myp/proyecto3/DispersadorSHA256.java
+/home/gaelchaparro06/CC/TercerSemestre/ModeladoProgramacion/MyP_Proyecto3/proyecto3/src/main/java/mx/unam/ciencias/myp/proyecto3/ExcepcionArchivoInvalido.java
+/home/gaelchaparro06/CC/TercerSemestre/ModeladoProgramacion/MyP_Proyecto3/proyecto3/src/main/java/mx/unam/ciencias/myp/proyecto3/Cifrador.java
+/home/gaelchaparro06/CC/TercerSemestre/ModeladoProgramacion/MyP_Proyecto3/proyecto3/src/main/java/mx/unam/ciencias/myp/proyecto3/CifradorAES.java
+/home/gaelchaparro06/CC/TercerSemestre/ModeladoProgramacion/MyP_Proyecto3/proyecto3/src/main/java/mx/unam/ciencias/myp/proyecto3/Documento.java
+/home/gaelchaparro06/CC/TercerSemestre/ModeladoProgramacion/MyP_Proyecto3/proyecto3/src/main/java/mx/unam/ciencias/myp/proyecto3/DecifradorAES.java

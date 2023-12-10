@@ -3,8 +3,17 @@ package mx.unam.ciencias.myp.proyecto3;
 import java.math.BigInteger;
 import java.util.Base64;
 
+/**
+ * Clase principal para correr el programa
+ */
 public class Cifrador {
 
+    /**
+     * Metodo principal para correr el programa
+     * 
+     * @param args los argumentos de la linea de comandos
+     * @throws Exception en caso de error
+     */
     public static void main(String[] args) throws Exception {
 
         if (args[0].equals("c")) {

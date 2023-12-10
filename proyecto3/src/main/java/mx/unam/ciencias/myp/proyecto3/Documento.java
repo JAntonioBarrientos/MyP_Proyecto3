@@ -5,6 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * <p>
+ * Clase que permite escribir bytes y leer bytes de documentos
+ * </p>
+ */
 public class Documento {
 
     /** La ruta del documento */
@@ -41,7 +46,7 @@ public class Documento {
      * Escribe los datos (bytes) decifrados en el mismo documento cifrado.
      * Es una operacion destructiva
      * 
-     * @param bytesDocumentoDecifrado los bytes decifrados del documento cifrado
+     * @param bytes los bytes a escribir en el documento
      */
     public void escribeBytesDocumento(byte[] bytes) {
         try (FileOutputStream salida = new FileOutputStream(new File(rutaDocumento))) {

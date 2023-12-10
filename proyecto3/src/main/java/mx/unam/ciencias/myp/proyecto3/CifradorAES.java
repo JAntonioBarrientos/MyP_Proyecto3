@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.File;
 import java.math.BigInteger;
 
+/**
+ * <p>
+ * Clase para cifrar documentos con AES 256
+ * </p>
+ */
 public class CifradorAES {
 
     /** Tipo de cifrado para el documento */
@@ -42,10 +47,10 @@ public class CifradorAES {
     /**
      * Constructor
      * 
-     * @param documentoClaro       el documento a encriptar
+     * @param rutaDocumentoClaro   la ruta del docuemnto a encriptar
      * @param contraUsuario        la contraseña con la que se encriptará el
      *                             documento
-     * @param rutaDocumentoCifrado la ruta donde se creará el documento cifrada
+     * @param rutaDocumentoCifrado la ruta donde irá el documento encriptado
      */
     public CifradorAES(String rutaDocumentoClaro, String contraUsuario, String rutaDocumentoCifrado) {
 
@@ -84,7 +89,8 @@ public class CifradorAES {
      * cual será agregado a los datos cifrados (los primeros 16 bytes) para que
      * posterioremente estos puedan ser decifrados con el mismo
      * 
-     * @throws IOException en caso de que algo salga mal al escribir el archivo
+     * @throws IOException en caso de que algo salga mal al escribir el
+     *                     archivo
      */
     public void cifra() throws IOException {
         try {

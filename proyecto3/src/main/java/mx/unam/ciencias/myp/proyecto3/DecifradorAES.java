@@ -14,6 +14,11 @@ import static java.nio.file.StandardCopyOption.*;
 
 import java.io.File;
 
+/**
+ * <p>
+ * Clase para decifrar docuemntos encriptados con AES 256
+ * </p>
+ */
 public class DecifradorAES {
 
     /** Tipo de cifrado para el documento */
@@ -100,9 +105,13 @@ public class DecifradorAES {
     }
 
     /**
+     * 
      * Decifra el documento originalmente cifrado, para ello se asueme que en los
      * datos (bytes) cifrados inicialmente los primeros 16 corresponden al IV
      * (vector inicial), pues de otra forma no se podría decifrar correctamente
+     *
+     * @throws InvalidKeyException en caso de error al decifrar los datos o por
+     *                             contraseña invalida
      */
     public void decifrar() throws InvalidKeyException {
         try {

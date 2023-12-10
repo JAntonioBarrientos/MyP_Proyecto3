@@ -4,6 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * <p>
+ * Clase que proporciona un metodo para dispersar cadenas con SHA-256
+ * </p>
+ */
 public class DispersadorSHA256 {
 
     /** Algoritmo de dispersion para la contrasña */
@@ -11,6 +16,8 @@ public class DispersadorSHA256 {
 
     /**
      * Dispersa la cadena ingresada por el usuario con el algortimo SHA-256
+     * 
+     * @param cadena la cadena a dispersar
      * 
      * @return la dispersion de la cadena en bytes
      */
