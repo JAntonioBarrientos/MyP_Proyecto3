@@ -58,8 +58,8 @@ public class CifradorAES {
             documentoClaro = new Documento(rutaDocumentoClaro);
             bytesDocumentoClaro = documentoClaro.leeBytesDocumento();
             contraDispersada = DispersadorSHA256.dispersa(contraUsuario);
+            contraDispersada = Polinomio.MOD.toByteArray();
             K = new BigInteger(contraDispersada);
-            K = Polinomio.MOD;
             this.rutaDocumentoCifrado = rutaDocumentoCifrado;
         }
 
