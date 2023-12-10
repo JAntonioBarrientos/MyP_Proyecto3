@@ -38,7 +38,7 @@ public class Proyecto3 {
         }
         try{
             AplicacionShamir aplicacionShamir = new AplicacionShamir(args);
-            //aplicacionShamir.ejecuta();
+            aplicacionShamir.ejecuta();
             System.exit(0);
         }catch(ExcepcionFormatoInvalido efi){
             System.err.printf("Error: %s\n",efi.getMessage());

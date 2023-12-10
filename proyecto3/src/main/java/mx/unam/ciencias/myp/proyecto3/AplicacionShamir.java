@@ -28,19 +28,25 @@ import java.nio.file.Paths;
 
 public class AplicacionShamir {
 
-    /** El modo de la aplicación, verdadero es que cifra (1) y falso es que descifra (2). */
+    /** El modo de la aplicación, falso es que cifra y verdadero es que descifra. */
     private boolean descifra;
     /** Llave de cifrado de AES obtenida del hash 
      * de la contraseña con SHA-256.*/  
-    private long key;
+    private BigInteger key;
+    /** El cifrador de AES. */
+    private CifradorAES cifrador;
+    /** El descifrador de AES. */
+    private DescifradorAES descifrador;
     /** El número de evaluaciones del polinomio. */
-    
-    /** El número total de evaluaciones requeridas. */
-
+    private int n;
+    /** El número minimo de puntos para descifrar. */
+    private int t;
     /** Lista de pares ordenados de evaluaciones */
     private List<ParOrdenado<BigInteger>> evaluaciones;
-    /** Ruta del archivo util */
-    public String rutaArchivo ;
+    /** Ruta del archivo claro. */
+    public String rutaArchivoClaro;
+    /** Ruta del archivo de evaluaciones. */
+    public String rutaArchivoEvaluaciones;
 
     /**
      * Construye una aplicacionShamir con base en los argumentos recibidos.
@@ -53,71 +59,46 @@ public class AplicacionShamir {
         if(!args[0].toLowerCase().equals("-c") && !args[0].toLowerCase().equals("-d"))
             throw new IllegalArgumentException("Modo de ejecución no válido.\n");
         if(args[0].toLowerCase().equals("-c")){
-            //this.cifrador = construyeCifrador(args);
+            //Contruir CifradorAES
+            descifra = false;
         }else{
-            //this.descifrador = construyeDescifrador(args);
+            descifra = true;
         }
     }
 
     /**
-     * Metodo auxiliar que construye una configuración 
-     * correcta para el cifrador apartir de un arreglo de argumentos.
-     * Se debe proporcionar, en la línea de llamada:
-     * 1. La opción c.
-     * 2. El nombre del archivo en el que serán guardadas 
-     * las n evaluaciones del polinomio.
-     * 3. El número total de evaluaciones requeridas (n > 2).
-     * 4. El número mínimo de puntos necesarios para descifrar (1 < t ≤ n).
-     * 5. El nombre del archivo con el documento claro.
-     * @param args arreglo de dimensiones variables recibido del metodo main.
-     * @throws ExcepcionOpcionInvalida si los argumentos estan en un formato incorrecto.
-     * @return el cifrador construido.
-     */
-    /*private CifradorShamir construyeCifrador(String[] args){
-        // Codigo pendiente
-        this.descifra = false;
-        return null;
-    }
-
-    /**
-     * Metodo auxiliar que construye una configuración 
-     * correcta para el descifrador apartir de un arreglo de argumentos.
-     * Se debe proporcionar, en la línea de llamada:
-     * 1. La opción d.
-     * 2. El nombre del archivo con, al menos, t de las n evaluaciones del polinomio.
-     * 3. El nombre del archivo cifrado.
-     * @param args arreglo de dimensiones variables recibido del metodo main.
-     * @throws ExcepcionOpcionInvalida si los argumentos estan en un formato incorrecto.
-     * @return el descifrador construido.
-     */
-    /*private DescifradorShamir construyeDescifrador(String[] args){
-        // Codigo pendiente
-        this.descifra = true;
-        consigueEvaluaciones(args[1]);
-        return null;
-    }*/
-
-    /**
     * Ejecuta el modo de la aplicación.
     */
-    /*public void ejecuta(){
+    public void ejecuta(){
         if(descifra) 
             descifra();
         else
             cifra();
-    }*/
+    }
 
     /** Modo cifra de la aplicación. .*/
-    /*private void cifra() {
-        cifrador.setPassword();
+    private void cifra() {
+        setPassword();
         cifrador.cifra();
-    }*/
+        Polinomio p = new Polinomio(cifrador.getK(), t);
+        evaluaciones = p.generaPuntos(n);
+        escribirParesOrdenados(rutaArchivo);
+    }
 
     /** Modo descifra de la aplicación. */
-    /*private void descifra() {
+    private void descifra() {
         descifrador.descifra();
-    }*/
+    }
 
+
+    /**
+     * Metodo que solicita y lee la contraseña de la entrada estandar.
+     */
+    private void setPassword(){
+        // Aqui va tu codigo
+    }
+
+    
     /**
      * Metodo auxiliar que lee un archivo y lo convierte en una arreglo de pares ordenados.
      * @param archivo el nombre del archivo a leer.
@@ -128,24 +109,15 @@ public class AplicacionShamir {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                // Divide la línea en dos números separados por espacio
                 String[] partes = linea.split(" ");
-                
-                // Convierte las partes a tipo numérico (puedes ajustar esto según tus necesidades)
                 BigInteger x =  new BigInteger (partes[0]);  
                 BigInteger y = new BigInteger (partes[1]);
-                
-                // Crea un nuevo ParOrdenado y agrégalo a la lista
                 ParOrdenado<BigInteger> par = new ParOrdenado<>(x, y);
                 evaluaciones.add(par);
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de errores de lectura del archivo
+            e.printStackTrace(); // QUITAR AL FINAL
         }
-
-        // Imprimir la lista de pares ordenados
-        /*for (ParOrdenado<Double> par : evaluaciones) 
-            System.out.println(par);*/
     }
 
     /**
@@ -156,7 +128,6 @@ public class AplicacionShamir {
      */
     public static String leerArchivo(String rutaArchivo) {
         StringBuilder contenido = new StringBuilder();
-
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -165,7 +136,6 @@ public class AplicacionShamir {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return contenido.toString();
     }
     
@@ -177,13 +147,10 @@ public class AplicacionShamir {
      */
     public void escribirArchivoSinExtension(String rutaArchivo, String contenido) {
         try {
-            // Obtener la ruta del archivo sin extensión
             Path rutaSinExtension = obtenerRutaSinExtension(rutaArchivo);
-
-            // Escribir el contenido en el nuevo archivo
             Files.write(rutaSinExtension, contenido.getBytes());
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de errores de entrada o salida
+            e.printStackTrace(); 
         }
     }
 
@@ -193,13 +160,8 @@ public class AplicacionShamir {
      * @return la ruta del archivo sin extensión.
      */
     private Path obtenerRutaSinExtension(String rutaArchivo) {
-        // Obtener la ruta del archivo como objeto Path
         Path rutaOriginal = Paths.get(rutaArchivo);
-
-        // Obtener el nombre del archivo sin extensión
         String nombreSinExtension = quitarExtension(rutaOriginal.getFileName().toString());
-
-        // Construir la ruta del archivo sin extensión
         return rutaOriginal.resolveSibling(nombreSinExtension);
     }
 
@@ -209,12 +171,11 @@ public class AplicacionShamir {
      * @return el nombre del archivo sin extensión.
      */
     private String quitarExtension(String nombreArchivo) {
-        // Encontrar la última aparición del punto (.) para obtener la extensión
         int index = nombreArchivo.lastIndexOf('.');
         if (index > 0) {
             return nombreArchivo.substring(0, index);
         }
-        return nombreArchivo; // Si no hay punto, devolver el nombre original
+        return nombreArchivo; 
     }
 
 
@@ -226,9 +187,8 @@ public class AplicacionShamir {
     public void escribirParesOrdenados(String rutaArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             for (ParOrdenado<BigInteger> par : evaluaciones) {
-                // Escribe cada par en una línea con el formato "x y"
                 writer.write(par.getX().toString() + " " + par.getY().toString());
-                writer.newLine(); // Agrega un salto de línea después de cada par
+                writer.newLine(); 
             }
         } catch (IOException e) {
             e.printStackTrace();
