@@ -1,5 +1,8 @@
 package mx.unam.ciencias.myd.proyecto3;
 
+import java.security.SecureRandom;
+import java.io.File;
+
 public class CifradorShamir {
 
     /** El nombre del archivo en el que serán guardadas 
@@ -58,7 +61,7 @@ public class CifradorShamir {
     public void cifra(){
         // Codigo pendiente
         cifraDocumento();
-        this.polinomio = generaPolinomioAleatorio(polinomio);
+        this.polinomio = generaPolinomioAleatorio(n);
         guardaEvaluaciones();
     }
 
@@ -77,6 +80,7 @@ public class CifradorShamir {
      */
     private Polinomio generaPolinomioAleatorio(int grado){
         // Codigo pendiente
+        return null;
     }
 
     /**

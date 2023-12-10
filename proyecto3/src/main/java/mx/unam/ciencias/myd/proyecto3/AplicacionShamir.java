@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 
 import java.text.NumberFormat;
+import java.util.List;
 
 
 
@@ -14,7 +15,7 @@ import java.text.NumberFormat;
  * ejecuta el modo para resolver laberintos leidos de la entrada 
  * estandar o el modo para generar laberintos dados los parametros
  * escritos como argumentos de la aplicación.</p>
- */
+ */     
 
 public class AplicacionShamir {
 
@@ -36,7 +37,7 @@ public class AplicacionShamir {
      * de la contraseña con SHA-256.*/
     private long key;
 
-    private ListArray<ParOrdenado> evaluaciones;
+    private List<ParOrdenado> evaluaciones;
 
 
     /**
@@ -73,6 +74,7 @@ public class AplicacionShamir {
      */
     private CifradorShamir construyeCifrador(String ... args){
         // Codigo pendiente
+        return null;
     }
 
     /**
@@ -88,6 +90,7 @@ public class AplicacionShamir {
      */
     private DescifradorShamir construyeDescifrador(String ... args){
         // Codigo pendiente
+        return null;
     }
 
 

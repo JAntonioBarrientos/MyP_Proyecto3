@@ -15,6 +15,7 @@ public class UtilAlgebraLineal  {
      */
     public static int[] suma(int[] v1, int[] v2){
         // Codigo pendiente
+        return null;
     }
     
 
@@ -25,6 +26,7 @@ public class UtilAlgebraLineal  {
      */
     public static int[] producto(int[] v, int k){
         // Codigo pendiente
+        return null;
     }
 
     /** Regresa el producto punto de dos vectores.
@@ -34,6 +36,7 @@ public class UtilAlgebraLineal  {
      */
     public static int productoPunto(int[] v1, int[] v2){
         // Codigo pendiente
+        return 0;
     }
 
     /** Regresa la matriz que resulta de intercambiar la fila i por la fila j.
@@ -44,6 +47,7 @@ public class UtilAlgebraLineal  {
      */
     public static int[][] intercambiaFila(int[][] m, int i, int j){
         // Codigo pendiente
+        return null;
     }
 
     /** Regresa el vector columna tal que AX = B.
@@ -53,6 +57,7 @@ public class UtilAlgebraLineal  {
      */
     public static int[] solucionSistema(int[][] A, int[] B){
         // Codigo pendiente
+        return null;
     }
 
 }

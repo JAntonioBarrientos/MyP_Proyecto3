@@ -49,6 +49,7 @@ public class Polinomio{
      */
     public long getCoeficiente(long grado){
         // Codigo pendiente
+        return 0;
     }
 
     /** 
@@ -57,6 +58,7 @@ public class Polinomio{
      */
     public long getCoeficientes(long[] grado){
         // Codigo pendiente
+        return 0;
     }
 
 
@@ -66,6 +68,7 @@ public class Polinomio{
      */
     public long getGrado(){
         // Codigo pendiente
+        return 0;
     }
 
     /** 
@@ -76,6 +79,7 @@ public class Polinomio{
      */
     public long[] potencias(long x){
         // Codigo pendiente
+        return null;
     }
 
     /**
@@ -84,6 +88,7 @@ public class Polinomio{
      * @return el valor del polinomio evaluado en x.
      */
     public long evalua(long x){
-        return UtilAlgebraLineal.productoPunto(coeficientes,potencias(x));
+        //return UtilAlgebraLineal.productoPunto(coeficientes,potencias(x));
+        return 0;
     }
 }
