@@ -31,7 +31,7 @@ public class Proyecto3 {
      * @param args argumentos de la línea de comandos.
      */
     public static void main(String[] args) {
-        if (args.length > 3) {
+        if (args.length < 3) {
             System.err.printf("Error: uso incorrecto de programa.\n");
             formato();
             System.exit(ERROR_USO);

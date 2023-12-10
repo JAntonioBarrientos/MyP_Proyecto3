@@ -1,7 +1,5 @@
 package mx.unam.ciencias.myp.proyecto3;
 
-import mx.unam.ciencias.myd.proyecto3.ParOrdenado;
-
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Random;
@@ -169,17 +167,20 @@ public class Polinomio{
      * @param n el numero de puntos a evaluar.
      * @return un arreglo de n puntos aleatorios.
      */
-    public List<ParOrdenado<BigInteger>> generaPuntos(int n){
-        List<ParOrdenado<BigInteger>> puntos = new List<ParOrdenado<BigInteger>>();
-        Set<BigInteger> set = new HashSet<BigInteger>();
-        BigInteger x = new BigInteger(78, new Random());
-        while(set.size() < n){
-            while(x.equals(new BigInteger("0")))
-                x = new BigInteger(78, new Random());
-            set.add(x);
-        }
-        for(BigInteger xi: set)
-            puntos.add(new ParOrdenado<BigInteger>(xi, evalua(xi)));
-        return puntos;
+    public ArrayList<ParOrdenado<BigInteger>> generaPuntos(int n){
+        ParOrdenado<BigInteger>[] puntos = new ParOrdenado[n];
+        Random r = new Random();
+        for(int i = 0; i < n; i++){
+            BigInteger x = new BigInteger(78, r);
+            while(x.equals(new BigInteger("0"))){
+                x = new BigInteger(78, r);
+            }
+            puntos[i] = new ParOrdenado<>(x, evalua(x));
+        }  
+        ArrayList<ParOrdenado<BigInteger>> puntos2 = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            puntos2.add(puntos[i]);
+        }      
+        return puntos2;
     }
 }

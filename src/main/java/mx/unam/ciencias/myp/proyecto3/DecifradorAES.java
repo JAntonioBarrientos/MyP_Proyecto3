@@ -11,6 +11,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import static java.nio.file.StandardCopyOption.*;
+import java.math.BigInteger;
 
 import java.io.File;
 
@@ -55,11 +56,11 @@ public class DecifradorAES {
      * @param contraUsuario        la contraseña con la que se decifrará el
      *                             documento
      */
-    public DecifradorAES(String rutaDocumentoCifrado, String contraUsuario) {
+    public DecifradorAES(String rutaDocumentoCifrado, BigInteger K) {
 
         if (verificaArchivo(rutaDocumentoCifrado)) {
             this.rutaDocumentoCifrado = rutaDocumentoCifrado;
-            contraDispersada = DispersadorSHA256.dispersa(contraUsuario);
+            contraDispersada = K.toByteArray();
             documentoCifrado = new Documento(rutaDocumentoCifrado);
             bytesDocumentoCifrado = documentoCifrado.leeBytesDocumento();
         }

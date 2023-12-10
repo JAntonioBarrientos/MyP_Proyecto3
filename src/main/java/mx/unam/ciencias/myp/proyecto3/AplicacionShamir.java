@@ -17,6 +17,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.security.InvalidKeyException;
+import java.util.Scanner;
+
 /**
  * <p>Clase para aplicaciones de archivos mze.</p>
  *
@@ -36,7 +39,7 @@ public class AplicacionShamir {
     /** El cifrador de AES. */
     private CifradorAES cifrador;
     /** El descifrador de AES. */
-    private DescifradorAES descifrador;
+    private DecifradorAES descifrador;
     /** El número de evaluaciones del polinomio. */
     private int n;
     /** El número minimo de puntos para descifrar. */
@@ -49,6 +52,8 @@ public class AplicacionShamir {
     public String rutaArchivoEvaluaciones;
     /** Ruta del archivo cifrado. */
     public String rutaArchivoCifrado;
+    /** Contraseña para cifrar el archivo. */
+    public String contra;
 
     /**
      * Construye una aplicacionShamir con base en los argumentos recibidos.
@@ -92,27 +97,64 @@ public class AplicacionShamir {
             cifra();
     }
 
-    /** Modo cifra de la aplicación. .*/
+    /** Modo cifra de la aplicación. . */
     private void cifra() {
-        setPassword();
-        cifrador.cifra();
-        Polinomio p = new Polinomio(cifrador.getK(), t);
-        evaluaciones = p.generaPuntos(n);
-        escribirParesOrdenados(rutaArchivo);
+        try {
+            setPassword();
+            cifrador = new CifradorAES(rutaArchivoClaro, contra, rutaArchivoClaro);
+            cifrador.cifra();
+
+            BigInteger K = new BigInteger("1234567890");
+            //Polinomio p = new Polinomio(cifrador.obtenSecreto(), t-1);
+            Polinomio p = new Polinomio(t-1);
+            p.setCoeficiente(K, 0);
+            BigInteger password = cifrador.obtenSecreto();
+            
+
+            System.out.println(password.toString());
+            System.out.println("Generando evaluaciones...");
+            evaluaciones = p.generaPuntos(n);
+            for(ParOrdenado<BigInteger> par : evaluaciones){
+                System.out.println(par.toString());
+            }
+            System.out.println("Evaluaciones generadas.");
+            escribirParesOrdenados(rutaArchivoEvaluaciones);
+            System.out.println("Escribir pares");
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
-    /** Modo descifra de la aplicación. */
+    /**  Modo descifra de la aplicación. */
     private void descifra() {
-        descifrador.descifra();
+        try {
+            consigueEvaluaciones(rutaArchivoEvaluaciones);
+            ParOrdenado<BigInteger>[] puntos = new ParOrdenado[evaluaciones.size()];
+            int i = 0;
+            for(ParOrdenado<BigInteger> par : evaluaciones){
+                puntos[i] = par;
+                i++;
+            }
+            for(int j = 0; j < puntos.length; j++){
+                System.out.println(puntos[j].toString());
+            }
+            key = Polinomio.interpolacion(puntos);
+            descifrador = new DecifradorAES(rutaArchivoCifrado, key);
+            descifrador.decifrar();
+        } catch (InvalidKeyException e) {
+            System.out.println("Ocurrió un error decifrando");
+        }
     }
-
 
     /**
-     * Metodo que solicita y lee la contraseña de la entrada estandar.
-     */
-    private void setPassword(){
-        // Aqui va tu codigo
-    }
+        Metodo que solicita y lee la contraseña de la entrada estandar.
+    */
+    private void setPassword() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Introduce la contraseña para cifar el documento: ");
+        contra = sc.nextLine();
+        sc.close();
+      }
 
     
     /**
@@ -131,9 +173,7 @@ public class AplicacionShamir {
                 ParOrdenado<BigInteger> par = new ParOrdenado<>(x, y);
                 evaluaciones.add(par);
             }
-        } catch (IOException e) {
-            e.printStackTrace(); // QUITAR AL FINAL
-        }
+        } catch (IOException e) {}
     }
 
     /**

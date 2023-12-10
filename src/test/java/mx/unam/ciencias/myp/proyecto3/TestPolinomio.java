@@ -93,7 +93,6 @@ public class TestPolinomio {
     public void testPolinomioAleatorio(){
         BigInteger terminoInd = new BigInteger("123456789");
         Polinomio p = new Polinomio(terminoInd, 14);
-        System.out.println(p.toString());
         Assert.assertTrue(true);
     }
 
